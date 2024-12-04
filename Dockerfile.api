@@ -1,0 +1,15 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY turbo.json ./
+COPY packages/tsconfig ./packages/tsconfig
+COPY packages/utils ./packages/utils
+COPY apps/api ./apps/api
+
+RUN npm install
+
+WORKDIR /app/apps/api
+
+CMD ["npm", "run", "dev"]
