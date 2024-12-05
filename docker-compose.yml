@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - API_PORT=5000
+    volumes:
+      - ./apps/api/src:/app/apps/api/src
+      - ./packages/utils/src:/app/packages/utils/src
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://api:3001
+    volumes:
+      - ./apps/web/src:/app/apps/web/src
+      - ./packages/ui-components/src:/app/packages/ui-components/src
+      - ./packages/utils/src:/app/packages/utils/src
+    depends_on:
+      - api
+
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile.docs
+    ports:
+      - "4000:4000"
+    environment:
+      - GATSBY_API_URL=http://api:3001
+    volumes:
+      - ./apps/docs/src:/app/apps/docs/src
+      - ./packages/ui-components/src:/app/packages/ui-components/src
+    depends_on:
+      - api

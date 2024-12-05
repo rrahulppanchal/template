@@ -1,0 +1,17 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY turbo.json ./
+COPY packages/tsconfig ./packages/tsconfig
+COPY packages/utils ./packages/utils
+COPY apps/api ./apps/api
+
+RUN yarn
+RUN yarn build
+
+WORKDIR /app/apps/api
+EXPOSE 5000
+
+CMD ["yarn", "dev"]
