@@ -4,12 +4,18 @@ WORKDIR /app
 
 COPY package*.json ./
 COPY turbo.json ./
+
 COPY packages/tsconfig ./packages/tsconfig
 COPY packages/ui-components ./packages/ui-components
-COPY apps/docs ./apps/docs
+COPY packages/utils ./packages/utils
 
-RUN npm install
+COPY apps/web ./apps/web
 
-WORKDIR /app/apps/docs
+# RUN yarn install
+# RUN yarn build --workspace=@repo/utils
 
-CMD ["npm", "run", "dev"]
+WORKDIR /app/apps/web
+
+EXPOSE 3000
+
+CMD ["yarn","dev"]

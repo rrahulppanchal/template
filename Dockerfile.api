@@ -8,8 +8,10 @@ COPY packages/tsconfig ./packages/tsconfig
 COPY packages/utils ./packages/utils
 COPY apps/api ./apps/api
 
-RUN npm install
+RUN yarn
+RUN yarn build
 
 WORKDIR /app/apps/api
+EXPOSE 5000
 
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]

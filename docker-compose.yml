@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile.api
     ports:
-      - "3001:3001"
+      - "5000:5000"
     environment:
       - NODE_ENV=development
-      - API_PORT=3001
+      - API_PORT=5000
     volumes:
       - ./apps/api/src:/app/apps/api/src
       - ./packages/utils/src:/app/packages/utils/src
@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile.web
     ports:
-      - "5173:5173"
+      - "3000:3000"
     environment:
       - VITE_API_URL=http://api:3001
     volumes:
@@ -34,7 +34,7 @@ services:
       context: .
       dockerfile: Dockerfile.docs
     ports:
-      - "8000:8000"
+      - "4000:4000"
     environment:
       - GATSBY_API_URL=http://api:3001
     volumes:
