@@ -13,4 +13,4 @@ fi
 # if [ $? -ne 0 ]; then
 #   echo "Tests failed. Commit aborted."
 #   exit 1gg
-# fi
+# finpx prettier --write .
